@@ -1,0 +1,25 @@
+footer{
+    
+    margin: 0 auto;
+    top:0px;
+    width: 100%;;
+clear: both;
+height: 190px;
+background-color: rgba(0, 0, 0, 0.671)
+
+}
+.p2{
+  position: absolute;
+  left: 100px;
+    color: white;
+    line-height: 20px;
+
+}
+.p3{
+    position: absolute;
+    left: 700px;
+      color: white;
+      line-height: 20px;
+  
+  }
+  
