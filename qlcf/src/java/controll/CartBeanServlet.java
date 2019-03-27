@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controll;
-
+//
 import dao.SanPhamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
