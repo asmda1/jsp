@@ -41,7 +41,10 @@
 
             NumberFormat nf = NumberFormat.getInstance();
             nf.setMinimumIntegerDigits(0);
+            SelectSIze dao = new SelectSIze();
+            SizeSP sisizeze = dao.selectID(request.getParameter("masize"));
         %>
+          <jsp:include page="header.jsp"></jsp:include>
     <section>
         <div class="container">
             <div class="row">
@@ -70,37 +73,40 @@
                                 </p>
                                 <h4>Chọn Size</h4>
 
-                                <% for (SizeSP sz : list) {%>
-                                <form method="get" action="ShowGiaTheoSize">
-                                    <div style="float: left">
-                                        <input type="submit" name="action" value="<%=sz.getMaSize()%>">
-                                         <input type="hidden" name="txtmasize" value="<%=sz.getMaSize()%>">
-                                        <input type="hidden" name="txtheso" value="<%=sz.getHeSo()%>"/>
-                                        <input type="hidden" name="txtsp" value="<%=sp.getTenSp()%>"/>
-                                        <input type="hidden" name="txtgia" value="<%=sp.getGiaBan()%>"/>
-                                        <input type="hidden" name="txtimg" value="<%=sp.getHinhAnh()%>"/>
-                                        <input type="hidden" name="txtmasp" value="<%=sp.getMaSanPham()%>"/>
-                                        
-                                    </div>
-                                </form>
-                                <% }%>
+                                <%
+
+                                    for (SizeSP show : dao.select()) {
+
+                                %>
+                                <a href="detail.jsp?masize=<%=show.getMaSize()%>&maSP=<%=sp.getMaSanPham()%>"><%=show.getMaSize()%></a>
+
+                                <%}%>
                                 </br> 
-
                                 <span>
-
-
-                                    <span> <%=nf.format(sp.getGiaBan())%>VNĐ</span> <!--<label>Số
+                                    <% if (request.getParameter("masize") != null) {%>
+                                    <span> <%=nf.format(sp.getGiaBan() * sisizeze.getHeSo())%> VNĐ</span> <!--<label>Số
                                             Lượng:</label> <input type="text" value="Nhập" />-->
 
+                                    <p>
+                                        <a
+                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=<%=sisizeze.getMaSize()%>"
+                                            type="button" class="btn btn-fefault cart"> <i
+                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                                        </a>
+                                    </p>
+                                    <%} else {%>
+                                    <span> <%=nf.format(sp.getGiaBan())%> VNĐ</span> 
+                                    <p>
+                                        <a
+                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=M"
+                                            type="button" class="btn btn-fefault cart"> <i
+                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                                        </a>
+                                    </p>
+                                    <%}%>
                                 </span>
 
-                                <p>
-                                    <a
-                                        href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"
-                                        type="button" class="btn btn-fefault cart"> <i
-                                            class="fa fa-shopping-cart"></i> Thêm vào giỏ
-                                    </a>
-                                </p>
+
                                 </br>
 
                                 <p></p>

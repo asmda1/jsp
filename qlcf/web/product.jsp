@@ -34,9 +34,22 @@
         <%
             SanPhamDAO dao = new SanPhamDAO();
             List<SanPham> list = dao.selectAll();
-              NumberFormat nf = NumberFormat.getInstance();
+            int start = 0, end = 9;
+            if (list.size() < 9) {
+                end = list.size();
+            }
+            if (request.getParameter("start") != null) {
+                start = Integer.parseInt(request.getParameter("start"));
+            }
+            if (request.getParameter("end") != null) {
+                end = Integer.parseInt(request.getParameter("end"));
+            }
+            NumberFormat nf = NumberFormat.getInstance();
             nf.setMinimumIntegerDigits(0);
-             CartBean cart = (CartBean) session.getAttribute("cart");
+
+            List<SanPham> listPage = dao.getListByPage(list, start, end);
+
+            CartBean cart = (CartBean) session.getAttribute("cart");
             if (cart == null) {
                 cart = new CartBean();
                 session.setAttribute("cart", cart);
@@ -45,22 +58,22 @@
 
         <div class="">
             <div>
-               
+
                 <h2>Sản Phẩm</h2>
                 <%
-                    for (SanPham sp : list) {
+                    for (SanPham sp : listPage) {
                 %>
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div style="padding: 15px"class="productinfo text-center">
-                                <img style="width: 250px" src="img/<%=sp.getHinhAnh()%>" alt="" />
+                <div class="col-sm-4" >
+                    <div class="product-image-wrapper" style="padding: 5px; width: 315px">
+                        <div class="single-products" >
+                            <div style="padding: 5px"class="productinfo text-center">
+                                <img style="width: 200px" src="img/<%=sp.getHinhAnh()%>" alt="" />
                                 <h2 ><%=sp.getTenSp()%>
-                            </h2>
-                            <p><%=nf.format(sp.getGiaBan())%>
-                                VNĐ</p>
+                                </h2>
+                                <p><%=nf.format(sp.getGiaBan())%>
+                                    VNĐ</p>
                                 <a
-                                    href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"
+                                    href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=M"
                                     class="btn btn-default add-to-cart"><i
                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                             </div>
@@ -68,8 +81,8 @@
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
-                                <li><a href="detail.jsp?maSP=<%=sp.getMaSanPham()%>"><i
-                                            class="fa fa-plus-square"></i>Xem Thêm</a></li>
+                                <li><a href="detail.jsp?maSP=<%=sp.getMaSanPham()%>&masize=M"><i
+                                            class="fa fa-plus-square"></i>Xem Chi Tiết</a></li>
 
                             </ul>
                         </div>
@@ -82,7 +95,29 @@
 
 
 
-          
+            <div style="clear: both;"></div>
+            <ul class="pagination">
+
+
+                <%
+                    int a, b;
+                    int limit = list.size() / 9;
+                    if (limit * 9 < list.size()) {
+                        limit += 1;
+                    }
+                    for (int i = 1; i <= limit; i++) {
+                        a = (i - 1) * 9;
+                        b = i * 9;
+                        if (b > list.size()) {
+                            b = list.size();
+                        }
+                %>
+                <li><a href="index.jsp?start=<%=a%>&end=<%=b%>"><%=i%></a></li>
+                    <%
+                        }
+                    %>
+            </ul>
+        </div>
 
 
 

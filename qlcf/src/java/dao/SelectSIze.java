@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.SanPham;
 import model.SizeSP;
 
 /**
@@ -22,6 +23,12 @@ public class SelectSIze {
     public static List<SizeSP> select() {
         String sql = "SELECT * FROM dbo.SizeSP";
         return select(sql);
+    }
+    
+     public SizeSP selectID(String ID) {
+        String sql = "Select * from dbo.SizeSP where maSize=?";
+        List<SizeSP> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private static List<SizeSP> select(String sql, Object... args) {

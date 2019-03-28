@@ -98,5 +98,13 @@ public class SanPhamDAO implements DAO<SanPham> {
         List<SanPham> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
+    
+    public List<SanPham> getListByPage(List<SanPham> arr, int start, int end) {
+		ArrayList<SanPham> list = new ArrayList<>();
+		for (int i = start; i < end; i++) {
+			list.add(arr.get(i));
+		}
+		return list;
+	}
 
 }

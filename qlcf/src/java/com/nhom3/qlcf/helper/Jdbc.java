@@ -9,7 +9,7 @@ import java.sql.*;
 
 /**
  *
- * @author Le Minh Hung - PS08234
+
  */
 public class Jdbc {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";

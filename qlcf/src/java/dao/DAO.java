@@ -25,7 +25,7 @@ public interface DAO<T> {
 
     public T selectID(String ID);
 
-    public List<T> select(String sql, Object... args);
+    public  List<T> select(String sql, Object... args);
 
-    public T readFromResultSet(ResultSet rs);
+    public  T readFromResultSet(ResultSet rs);
 }

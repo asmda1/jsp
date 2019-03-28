@@ -6,6 +6,8 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +36,7 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
     @Override
     public boolean update(NguoiDung t) {
         String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
-        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(),t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
+        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(), t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
     }
 
     @Override
@@ -86,6 +88,25 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         String sql = "Select * from dbo.NguoiDung where maNguoiDung=?";
         List<NguoiDung> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public static boolean checkLogin(String username, String pass) {
+        String sql = "Select * from dbo.NguoiDung WHERE taiKhoan ='" + username + "' and matKhau='" + pass
+                + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+      
+        System.out.println(checkLogin("admin","123"));
     }
 
 }

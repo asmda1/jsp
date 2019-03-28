@@ -86,5 +86,7 @@ public class NhaCungCapDAO implements DAO<NhaCungCap> {
     public NhaCungCap selectID(String ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 
 }
