@@ -62,7 +62,8 @@ public class PayServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        String txtmakh = request.getParameter("txtmakh");
+        String txmaKH = request.getParameter("txmaKH");
+        String txtemail = request.getParameter("txtemail");
         String tenkh = request.getParameter("tenkh");
         String dienthoai = request.getParameter("dienthoai");
         String diachi = request.getParameter("diachi");
@@ -110,10 +111,12 @@ public class PayServlet extends HttpServlet {
                     KhachHangDAO kdao = new KhachHangDAO();
                     SizeSP size = new SizeSP();
                     Extra ex = new Extra();
-                    kh.setMakh(txtmakh);
+                    kh.setMakh(txmaKH);
+                    kh.setEmail(txtemail);
                     kh.setDiaChi(diachi);
                     kh.setTenKh(tenkh);
                     kh.setDienThoai(dienthoai);
+                    kdao.updateKHonl(kh, kh.getMakh());//update KH
                     nd.setMaNguoidung("ND001");
                     pr.setMaSanPham(ds.getKey().getMaSanPham());
                     HoaDon hd = new HoaDon();
@@ -124,8 +127,7 @@ public class PayServlet extends HttpServlet {
                     hd.setTongTien(ds.getKey().getGiaBan() * ds.getValue());
                     hd.setNgayHD(date);
                     hd.setChietKhau(0);
-                    kdao.insert(kh);
-                    hdDAO.insert(hd);
+                    hdDAO.insert(hd);//insert HD chưa thanh toán 
                     CTHoaDon cthd = new CTHoaDon();
                     cthd.setMaHoaDon(hd);
                     cthd.setMaSanPham(pr);
@@ -138,7 +140,7 @@ public class PayServlet extends HttpServlet {
 
                 }
 
-                request.setAttribute("message", "Thanh toán thành công !");
+                request.setAttribute("message", "Thanh toán thành công !"); //tạm thời ko dùng
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 // response.sendRedirect("/SOF301_Assignment/checkout.jsp");
             } else {
