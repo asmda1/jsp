@@ -73,7 +73,7 @@
                             <ul class="nav navbar-nav">
 
                        
-                                <%if (session.getAttribute("usernamex") == null) {%>
+                            <%if (session.getAttribute("usernamex") == null ) {%>
                                 <li><a href="login.jsp"><i class=""></i>
                                         Đăng Nhập</a></li>
                                 <!--<li><a href="#"><i class="fa fa-star"></i> Danh Sách</a></li>-->    
@@ -82,8 +82,8 @@
                                 <li><a href="cart.jsp"><i class=""></i>
                                         Giỏ Hàng</a></li><% } else {%>
                                 <li><a >
-                                        TK:  <%=session.getAttribute("usernamex")%>
-
+                                        Email:  <%=session.getAttribute("usernamex")%>
+                                    
                                     </a></li>
                                 <li><a href="checkout.jsp"><i class=""></i>
                                         Thanh Toán</a></li>

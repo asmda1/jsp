@@ -73,7 +73,7 @@
                                 <p><%=nf.format(sp.getGiaBan())%>
                                     VNĐ</p>
                                 <a
-                                    href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=M"
+                                    href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"
                                     class="btn btn-default add-to-cart"><i
                                         class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                             </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
-                                <li><a href="detail.jsp?maSP=<%=sp.getMaSanPham()%>&masize=M"><i
+                                <li><a href="detail.jsp?maSP=<%=sp.getMaSanPham()%>"><i
                                             class="fa fa-plus-square"></i>Xem Chi Tiết</a></li>
 
                             </ul>

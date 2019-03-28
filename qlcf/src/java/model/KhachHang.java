@@ -7,22 +7,24 @@ package model;
 
 /**
  *
- * @author baotri1998
+ * @author h.Phong
  */
 public class KhachHang {
-  private  String makh,tenKh,email,dienThoai,diaChi;
+  private  String makh,tenKh,email,dienThoai,diaChi, matKhau;
   private  boolean trangThai;
   private  int diemThuong;
 
-    public KhachHang(String makh, String tenKh, String email, String dienThoai, String diaChi, boolean trangThai, int diemThuong) {
+    public KhachHang(String makh, String tenKh, String email, String dienThoai, String diaChi, String matKhau, boolean trangThai, int diemThuong) {
         this.makh = makh;
         this.tenKh = tenKh;
         this.email = email;
         this.dienThoai = dienThoai;
         this.diaChi = diaChi;
+        this.matKhau = matKhau;
         this.trangThai = trangThai;
         this.diemThuong = diemThuong;
     }
+
 
     public KhachHang() {
     }
@@ -82,6 +84,17 @@ public class KhachHang {
     public void setDiemThuong(int diemThuong) {
         this.diemThuong = diemThuong;
     }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+    
+    
+    
     
     
 }

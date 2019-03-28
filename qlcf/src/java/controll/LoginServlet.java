@@ -5,6 +5,7 @@
  */
 package controll;
 
+import dao.KhachHangDAO;
 import dao.NguoiDungDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.KhachHang;
 import model.NguoiDung;
 
 /**
@@ -24,7 +26,7 @@ import model.NguoiDung;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    private NguoiDungDAO taiKhoanDAO = new NguoiDungDAO();
+    private KhachHangDAO taiKhoanDAO = new KhachHangDAO();
     private static final long serialVersionUID = 1L;
 
     public LoginServlet() {
@@ -37,34 +39,34 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String usernamex = request.getParameter("ten_dang_nhap");
-        String passwordx = request.getParameter("mat_khau");
+        String email = request.getParameter("so_dien_thoai");
+        String pass = request.getParameter("mat_khau");
         String error = "";
 
-        if (usernamex.equals("") || passwordx.equals("")) {
+        if (email.equals("") || pass.equals("")) {
             error = "Vui lòng nhập đầy đủ thông tin !";
 
-        } else if (taiKhoanDAO.checkLogin(usernamex, passwordx) == false) {
+        } else if (taiKhoanDAO.checkLogin(email, pass) == false) {
             error = "Tài Khoản hoặc Mật Khẩu không chính xác !";
-        } else if (taiKhoanDAO.checkLogin(usernamex, passwordx) == false) {
+        } else if (taiKhoanDAO.checkLogin(email, pass) == false) {
             error = "Tài Khoản hoặc Mật Khẩu không chính xác !";
         }
         if (error.length() > 0) {
             request.setAttribute("error", error);
         }
 
-        request.setAttribute("usernamex", usernamex);
-        request.setAttribute("passwordx", passwordx);
+        request.setAttribute("usernamex", email);
+        request.setAttribute("passwordx", pass);
 
         String url = "/index.jsp";
 
         try {
-            if (taiKhoanDAO.checkLogin(usernamex, passwordx) == true) {
+            if (taiKhoanDAO.checkLogin(email, pass) == true) {
                 url = "/index.jsp";
                 HttpSession session = request.getSession();
-                session.setAttribute("usernamex", usernamex);
+                session.setAttribute("usernamex", email);
             }else{
-                 url = "/Error.jsp";
+                 url = "/account.jsp";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
             rd.forward(request, response);

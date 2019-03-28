@@ -34,12 +34,12 @@
                 error = (String) request.getAttribute("error");
             }
             //Phần Đăng Nhập (LogiServelet)
-            String usernamex = "", passwordx = "";
-            if (request.getAttribute("usernamex") != null) {
-                usernamex = (String) request.getAttribute("usernamex");
+            String pass = "", email = "";
+            if (request.getAttribute("email") != null) {
+                email = (String) request.getAttribute("email");
             }
-            if (request.getAttribute("passwordx") != null) {
-                passwordx = (String) request.getAttribute("passwordx");
+            if (request.getAttribute("pass") != null) {
+                pass = (String) request.getAttribute("pass");
             }
         %>
 
@@ -49,13 +49,16 @@
                 <div class="row">
 
                     <!--login form-->
-                    <h2>Đăng Nhập</h2>
+                    <h2>Đăng Nhập Mua Hàng</h2>
                     <form align="center" action="LoginServlet" method="post">
+                        <h4>Nhập Email</h4>
                         <p style="color: red"><%=error%>
-                    <div style="padding: 10px">  <input style="width: 50%;height:40px" type="text" placeholder="Tài Khoản" name="ten_dang_nhap"
-                                                        value="<%=usernamex%>" /> </div>
+                    <div style="padding: 10px">  <input style="width: 50%;height:40px" type="text" placeholder="Tài Khoản" name="so_dien_thoai"
+                                                        value="<%=email%>" /> </div>
+                                                        
+                            <h4>Nhập Mật Khẩu</h4>                            
                     <div style="padding: 10px">  <input style="width: 50%;height:40px" type="password"
-                                  placeholder="Mật Khẩu" name="mat_khau" value="<%=passwordx%>" /></div>
+                                  placeholder="Mật Khẩu" name="mat_khau" value="<%=pass%>" /></div>
                     <input type="hidden" name="access" value="2" />
                 <input type="hidden" name="status" value="1" /></div><br>
                 <div align="center"> <span

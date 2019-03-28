@@ -83,41 +83,41 @@
                                                     Mã Sản Phẩm:
                                                     <%=ds.getKey().getMaSanPham()%><br>
                                                     Mã Size: 
-                                                    <%=sisizeze.getMaSize()%>
+                                                    <%--=//sisizeze.getMaSize()--%>
 
                                                 </p>
 
                                             </td>
                                             <td class="cart_price">
-                                                <% if (request.getParameter("masize") == null) {%>
+                                               <%-- //if (request.getParameter("masize") == null) {--%>
                                                 <p><%=nf.format(ds.getKey().getGiaBan())%>
                                                     VNĐ
                                                 </p>
-                                                <% } else {%>
-                                                <p><%=nf.format(ds.getKey().getGiaBan() * sisizeze.getHeSo())%>
-                                                    VNĐ
+                                                <%-- //} else {%>
+                                                <p><%=//nf.format(ds.getKey().getGiaBan() * sisizeze.getHeSo())%>
+                                                 
                                                 </p>
 
-                                                <%}%>
+                                                <%//}--%>
                                             </td>
                                             <td class="cart_quantity">
                                                 <div class="cart_quantity_button">
                                                     <a class="cart_quantity_up"
-                                                       href="CartBeanServlet?enter=tang&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=<%=sisizeze.getMaSize()%>">
+                                                       href="CartBeanServlet?enter=tang&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
                                                         + </a> <input class="cart_quantity_input" type="text"
                                                                   value="<%=ds.getValue()%>" autocomplete="off" size="2"
                                                                   disabled=""> <a class="cart_quantity_down"
-                                                                  href="CartBeanServlet?enter=giam&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=<%=sisizeze.getMaSize()%>">
+                                                                  href="CartBeanServlet?enter=giam&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
                                                         - </a>
                                                 </div>
                                             </td>
                                             <td class="cart_total">
-                                                <p class="cart_total_price"><%=nf.format(ds.getValue() * ds.getKey().getGiaBan() * sisizeze.getHeSo())%>
+                                                <p class="cart_total_price"><%=nf.format(ds.getValue() * ds.getKey().getGiaBan())%>
                                                     VNĐ
                                                 </p>
                                             </td>
                                             <td class="cart_delete"><a class="cart_quantity_delete"
-                                                                       href="CartBeanServlet?enter=remove&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=<%=sisizeze.getMaSize()%>"><i
+                                                                       href="CartBeanServlet?enter=remove&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"><i
                                                         class="fa fa-times"></i></a></td>
                                         </tr>
 

@@ -73,37 +73,31 @@
                                 </p>
                                 <h4>Chọn Size</h4>
 
-                                <%
+                                <%--
 
-                                    for (SizeSP show : dao.select()) {
+                                  //  for (SizeSP show : dao.select()) {
 
-                                %>
-                                <a href="detail.jsp?masize=<%=show.getMaSize()%>&maSP=<%=sp.getMaSanPham()%>"><%=show.getMaSize()%></a>
+                                --%>
+                                <a href="detail.jsp?<%--=//show.getMaSize()--%>&maSP=<%--=//sp.getMaSanPham()--%>"><%--=//show.getMaSize()--%></a>
 
-                                <%}%>
+                                <%--//}--%>
                                 </br> 
                                 <span>
-                                    <% if (request.getParameter("masize") != null) {%>
-                                    <span> <%=nf.format(sp.getGiaBan() * sisizeze.getHeSo())%> VNĐ</span> <!--<label>Số
+                                    <%-- //if (request.getParameter("masize") != null) {--%>
+                                    <span> <%--=//nf.format(sp.getGiaBan() * sisizeze.getHeSo())--%></span> <!--<label>Số
                                             Lượng:</label> <input type="text" value="Nhập" />-->
 
-                                    <p>
-                                        <a
-                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=<%=sisizeze.getMaSize()%>"
-                                            type="button" class="btn btn-fefault cart"> <i
-                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ
-                                        </a>
-                                    </p>
-                                    <%} else {%>
+                                  
+                                    <%--//} else {--%>
                                     <span> <%=nf.format(sp.getGiaBan())%> VNĐ</span> 
                                     <p>
                                         <a
-                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>&masize=M"
+                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"
                                             type="button" class="btn btn-fefault cart"> <i
                                                 class="fa fa-shopping-cart"></i> Thêm vào giỏ
                                         </a>
                                     </p>
-                                    <%}%>
+                                    <%--}--%>
                                 </span>
 
 
@@ -132,8 +126,9 @@
 
                     </div>
                 </div>
+                               
             </div>
     </section>
-
+     <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

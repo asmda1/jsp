@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Thanh Toán | TNP</title>
+        <title>Thanh Toán | TNP-Coffee</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -32,8 +32,8 @@
     <body>
 
         <%
-            if (session.getAttribute("usernamex") != null) {
-                response.sendRedirect("");
+            if (session.getAttribute("usernamex") == null) {
+                response.sendRedirect("/qlcf/account.jsp");
             } else {
                 CartBean cart = (CartBean) session.getAttribute("cart");
                 if (cart == null) {
@@ -132,29 +132,31 @@
         <section id="cart_items">
             <div class="container">
                 <div>
+                <% KhachHangDAO dao = new KhachHangDAO();
+                    KhachHang kh = dao.selectID(session.getAttribute("usernamex").toString());
+                %>
+                <form align="center" action="PayServlet" method="post">
+                    <p>Tên Bạn</p>
+                    <span style="color: red;"><%=error_kh%></span>  </br>
+                    <input style="width: 50%;height:40px" name="tenkh" value="<%=kh.getTenKh()%>"></input>
 
-                    <form align="center" action="PayServlet" method="post">
-                        <p>Tên Bạn</p>
-                        <span style="color: red;"><%=error_kh%></span>  </br>
-                    <input style="width: 50%;height:40px" name="tenkh" value="<%=tenkh%>"></input>
-
-                    <p>Địa Chỉ</p>
+                    <p>Thay Đổi Địa Chỉ(Có thể bỏ qua)</p>
                     <span style="color: red;"><%=error_address%></span>  </br>
-                    <input style="width: 50%;height:40px" name="diachi" value="<%=diachi%>"></input>
+                    <input style="width: 50%;height:40px" name="diachi" value="<%=kh.getDiaChi()%>"></input>
 
-                    <p>Số Điện Thoại</p>
+                    <p>SDT Ship (Có thể bỏ qua)</p>
                     <span style="color: red;"><%=error_sdt%></span>  </br>
-                    <input style="width: 50%;height:40px" name="dienthoai" value="<%=dienthoai%>"></input>
+                    <input style="width: 50%;height:40px" name="dienthoai" value="<%=kh.getDienThoai()%>"></input>
 
                     </br>
-                    <input type="hidden" value="<%=session.getAttribute("usernamex")%>" name="Account" />
-                    <input type="hidden" value="<%=AutogetKH()%>" name="txtmakh" />
+                    <input type="hidden" value="<%=session.getAttribute("usernamex")%>" name="txtemail" />
+                    <input type="hidden" value="<%=kh.getMakh()%>" name="txmaKH" />
                     <input type="hidden" value="<%=AutogetMaHD()%>" name="txthd" />
                     <input type="hidden" value="EX001" name="txtextra" />
                     <input type="hidden" value="M" name="txtSize" />
                     <input type="submit" value="Xác Nhận Mua Hàng" class="btn btn-primary" name="action" />
                 </form>
-
+                <span style="color: red;">${message}</span>
 
 
 
@@ -162,7 +164,7 @@
             </div>
 
             <div class="review-payment">
-                <h2>Thông Tin Đơn Hàng</h2>
+                <h2>Đơn Hàng Đặt Mua</h2>
             </div>
 
             <div class="table-responsive cart_info">
@@ -182,7 +184,7 @@
                         %>
                         <tr>
                             <td class="cart_product"><a href=""><img style="width: 200px"
-                                                                     src="<%=ds.getKey().getHinhAnh()%>" alt=""></a></td>
+                                                                     src="img/<%=ds.getKey().getHinhAnh()%>" alt=""></a></td>
                             <td class="cart_description">
                                 <h4>
                                     <a href=""><%=ds.getKey().getMaSanPham()%></a>
@@ -196,31 +198,30 @@
                                     VNĐ
                                 </p>
                             </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up"
-                                       href="CartServlet?enter=tang&ID_Product=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
-                                        + </a> <input class="cart_quantity_input" type="text"
-                                                  value="<%=ds.getValue()%>" autocomplete="off" size="2"
-                                                  disabled=""> <a class="cart_quantity_down"
-                                                  href="CartServlet?enter=giam&ID_Product=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
-                                        - </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price"><%=nf.format(ds.getValue() * ds.getKey().getGiaBan())%>
-                                    VNĐ
-                                </p>
-                            </td>
-                            <td class="cart_delete"><a class="cart_quantity_delete"
-                                                       href="CartServlet?enter=remove&ID_Product=<%=ds.getKey().getGiaBan()%>&cartID=<%=System.currentTimeMillis()%>"><i
-                                        class="fa fa-times"></i></a></td>
-                        </tr>
+                          <td class="cart_quantity">
+                                                <div class="cart_quantity_button">
+                                                    <a class="cart_quantity_up"
+                                                       href="CartBeanServlet?enter=tang&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
+                                                        + </a> <input class="cart_quantity_input" type="text"
+                                                                  value="<%=ds.getValue()%>" autocomplete="off" size="2"
+                                                                  disabled=""> <a class="cart_quantity_down"
+                                                                  href="CartBeanServlet?enter=giam&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>">
+                                                        - </a>
+                                                </div>
+                                            </td>
+                                            <td class="cart_total">
+                                                <p class="cart_total_price"><%=nf.format(ds.getValue() * ds.getKey().getGiaBan())%>
+                                                    VNĐ
+                                                </p>
+                                            </td>
+                                            <td class="cart_delete"><a class="cart_quantity_delete"
+                                                                       href="CartBeanServlet?enter=remove&maSP=<%=ds.getKey().getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"><i
+                                                        class="fa fa-times"></i></a></td>
+                                        </tr>
 
-                        <%
-                            }
-                        %>
-
+                                        <%
+                                            }
+                                        %>
                     </tbody>
                 </table>
             </div>
