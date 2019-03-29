@@ -20,7 +20,7 @@ public class SanPham implements Comparable<SanPham>{
     private double giaBan;
     private boolean trangThai;
     private String hinhAnh;
-
+    private SizeSP sizeSP;
     public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, HangHoa maHangHoa, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
         this.maSanPham = maSanPham;
         this.maLoaiSanPham = maLoaiSanPham;
@@ -29,6 +29,14 @@ public class SanPham implements Comparable<SanPham>{
         this.giaBan = giaBan;
         this.trangThai = trangThai;
         this.hinhAnh = hinhAnh;
+    }
+
+    public SizeSP getSizeSP() {
+        return sizeSP;
+    }
+
+    public void setSizeSP(SizeSP sizeSP) {
+        this.sizeSP = sizeSP;
     }
 
     

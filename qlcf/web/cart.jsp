@@ -82,8 +82,9 @@
                                                 <p>
                                                     Mã Sản Phẩm:
                                                     <%=ds.getKey().getMaSanPham()%><br>
-                                                    Mã Size: 
+                                                    
                                                     <%--=//sisizeze.getMaSize()--%>
+                                                    
 
                                                 </p>
 

@@ -90,6 +90,7 @@ public class DangKy extends HttpServlet {
         }
         request.setAttribute("dienthoai", dienthoai);
         request.setAttribute("tenkh", tenkh);
+            request.setAttribute("email", email);
         String url = "/account.jsp";
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

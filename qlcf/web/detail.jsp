@@ -44,17 +44,17 @@
             SelectSIze dao = new SelectSIze();
             SizeSP sisizeze = dao.selectID(request.getParameter("masize"));
         %>
-          <jsp:include page="header.jsp"></jsp:include>
-    <section>
-        <div class="container">
-            <div class="row">
+        <jsp:include page="header.jsp"></jsp:include>
+        <section>
+            <div class="container">
+                <div class="row">
 
-                <div class="col-sm-9 padding-right">
-                    <div class="product-details">
-                        <!--product-details-->
-                        <div class="col-sm-5">
-                            <div class="view-product">
-                                <img src="img/<%=sp.getHinhAnh()%>" alt="" />
+                    <div class="col-sm-9 padding-right">
+                        <div class="product-details">
+                            <!--product-details-->
+                            <div class="col-sm-5">
+                                <div class="view-product">
+                                    <img src="img/<%=sp.getHinhAnh()%>" alt="" />
 
                             </div>
 
@@ -73,22 +73,36 @@
                                 </p>
                                 <h4>Chọn Size</h4>
 
-                                <%--
+                                <%
 
-                                  //  for (SizeSP show : dao.select()) {
+                                    for (SizeSP show : dao.select()) {
+                                        show.getMaSize();
+                                        show.getHeSo();
+                                        sp.setSizeSP(show);
+                                %>
+                                <a href="detail.jsp?maSP=<%=sp.getMaSanPham()%>&masize=<%=sp.getSizeSP().getMaSize()%>"><%=show.getMaSize()%></a>
 
-                                --%>
-                                <a href="detail.jsp?<%--=//show.getMaSize()--%>&maSP=<%--=//sp.getMaSanPham()--%>"><%--=//show.getMaSize()--%></a>
-
-                                <%--//}--%>
+                                <%}%>
                                 </br> 
                                 <span>
-                                    <%-- //if (request.getParameter("masize") != null) {--%>
-                                    <span> <%--=//nf.format(sp.getGiaBan() * sisizeze.getHeSo())--%></span> <!--<label>Số
-                                            Lượng:</label> <input type="text" value="Nhập" />-->
+                                    <%
 
-                                  
-                                    <%--//} else {--%>
+                                        if (request.getParameter("masize") != null) {
+                                            sisizeze.getHeSo();
+                                            sp.setSizeSP(sisizeze);
+                                    %>
+
+                                    <span> <%=nf.format(sp.getGiaBan() * sp.getSizeSP().getHeSo())%></span> <!--<label>Số
+                                            Lượng:</label> <input type="text" value="Nhập" />-->
+                                    <p>
+                                        <a
+                                            href="CartBeanServlet?enter=insert&maSP=<%=sp.getMaSanPham()%>&cartID=<%=System.currentTimeMillis()%>"
+                                            type="button" class="btn btn-fefault cart"> <i
+                                                class="fa fa-shopping-cart"></i> Thêm vào giỏ
+                                        </a>
+                                    </p>
+
+                                    <%} else {%>
                                     <span> <%=nf.format(sp.getGiaBan())%> VNĐ</span> 
                                     <p>
                                         <a
@@ -97,7 +111,7 @@
                                                 class="fa fa-shopping-cart"></i> Thêm vào giỏ
                                         </a>
                                     </p>
-                                    <%--}--%>
+                                    <%}%>
                                 </span>
 
 
@@ -126,9 +140,9 @@
 
                     </div>
                 </div>
-                               
+
             </div>
     </section>
-     <jsp:include page="footer.jsp"></jsp:include>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
