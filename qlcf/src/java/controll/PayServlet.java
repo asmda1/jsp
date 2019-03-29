@@ -72,7 +72,15 @@ public class PayServlet extends HttpServlet {
         String masize = request.getParameter("txtSize");
         HttpSession session = request.getSession();
         CartBean cart = (CartBean) session.getAttribute("cart");
-        String error_address = "", error_methods = "", error_email = "";
+        String error_address = "", error_methods = "";
+        if (diachi.trim().equals("")) {
+
+            error_address = " Hiện Tại địa chỉ chưa có! Vui lòng nhập địa chỉ ship!";
+
+        }
+        if (error_address.length() > 0) {
+            request.setAttribute("error_address", error_address);
+        }
 
         /* // Validate dia chi
         if (Shipping_Address.equals("")) {
@@ -140,8 +148,8 @@ public class PayServlet extends HttpServlet {
 
                 }
 
-                request.setAttribute("message", "Thanh toán thành công !"); //tạm thời ko dùng
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.setAttribute("message", "Thanh toán thành công !"); 
+                request.getRequestDispatcher("/checkout.jsp").forward(request, response);
                 // response.sendRedirect("/SOF301_Assignment/checkout.jsp");
             } else {
                 request.setAttribute("message", "Mua hàng thất bại !");

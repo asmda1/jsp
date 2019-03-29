@@ -144,7 +144,7 @@
                     <span style="color: red;"><%=error_address%></span>  </br>
                     <input style="width: 50%;height:40px" name="diachi" value="<%=kh.getDiaChi()%>"></input>
 
-                    <p>SDT Ship (Có thể bỏ qua)</p>
+                    <p>Thay Đổi SDT Ship (Có thể bỏ qua)</p>
                     <span style="color: red;"><%=error_sdt%></span>  </br>
                     <input style="width: 50%;height:40px" name="dienthoai" value="<%=kh.getDienThoai()%>"></input>
 
@@ -156,7 +156,7 @@
                     <input type="hidden" value="M" name="txtSize" />
                     <input type="submit" value="Xác Nhận Mua Hàng" class="btn btn-primary" name="action" />
                 </form>
-                <span style="color: red;">${message}</span>
+                <span style="color: #0083C9;">${message}</span>
 
 
 

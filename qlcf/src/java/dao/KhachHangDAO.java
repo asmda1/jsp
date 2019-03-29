@@ -102,6 +102,30 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
+        public static boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='"+ sdt+ "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+              public static boolean checkEmail(String email) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='"+ email+ "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean updateKHonl(KhachHang t, String makh) {
         String sql = "Update dbo.KhachHang set tenKh=?, dienThoai=?, diaChi=? where maKh=?";

@@ -25,7 +25,7 @@
             error_address = (String) request.getAttribute("error_address");
         }
         if (request.getAttribute("error_kh") != null) {
-            error_kh = (String) request.getAttribute("error_sdt");
+            error_kh = (String) request.getAttribute("error_kh");
         }
         if (request.getAttribute("error_sdt") != null) {
             error_sdt = (String) request.getAttribute("error_sdt");
@@ -130,10 +130,10 @@
                 <input style="width: 50%;height:40px" placeholder="Họ Tên" name="tenkh" value="<%=tenkh%>"></input>
                 <p>Email Đăng Ký*</p>
                 <span style="color: red;"><%=error_email%></span>  </br>
-                <input style="width: 50%;height:40px" placeholder="Email" name="email" value="<%=email%>"></input>
+                <input style="width: 50%;height:40px" type="email" placeholder="Email" name="email" value="<%=email%>"></input>
                 <p>Mật Khậu Đăng Ký*</p>
                 <span style="color: red;"><%=error_pass%></span>  </br>
-                <input style="width: 50%;height:40px" placeholder="Mật Khẩu" name="matkhau" value="<%=matkhau%>"></input>
+                <input style="width: 50%;height:40px" type="password" placeholder="Mật Khẩu" name="matkhau" value="<%=matkhau%>"></input>
                 <p>Địa Chỉ</p>
                 <span style="color: red;"><%=error_address%></span>  </br>
                 <input style="width: 50%;height:40px" placeholder="Địa Chỉ"  name="diachi" value="<%=diachi%>"></input>
@@ -143,10 +143,10 @@
 
                 </br>
                 <input type="hidden" value="<%=session.getAttribute("usernamex")%>" name="Account" />
-                <input type="text" value="<%=AutogetKH()%>" name="txtmakh" />
+                <input type="hidden" value="<%=AutogetKH()%>" name="txtmakh" />
                 <input type="submit" value="Đăng Ký" class="btn btn-primary" name="action" />
-            </form>
-
+            </form><br>
+            <span style="color: blue">${message}</span>
         </div>
         <!--/sign up form-->
 

@@ -43,14 +43,12 @@ public class LoginServlet extends HttpServlet {
         String pass = request.getParameter("mat_khau");
         String error = "";
 
-        if (email.equals("") || pass.equals("")) {
+        if (email.trim().equals("") && pass.trim().equals("")) {
             error = "Vui lòng nhập đầy đủ thông tin !";
 
         } else if (taiKhoanDAO.checkLogin(email, pass) == false) {
             error = "Tài Khoản hoặc Mật Khẩu không chính xác !";
-        } else if (taiKhoanDAO.checkLogin(email, pass) == false) {
-            error = "Tài Khoản hoặc Mật Khẩu không chính xác !";
-        }
+        } 
         if (error.length() > 0) {
             request.setAttribute("error", error);
         }
@@ -66,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("usernamex", email);
             }else{
-                 url = "/account.jsp";
+                   url = "/login.jsp";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
             rd.forward(request, response);

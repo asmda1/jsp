@@ -24,6 +24,8 @@ import model.KhachHang;
 @WebServlet(name = "DangKy", urlPatterns = {"/DangKy"})
 public class DangKy extends HttpServlet {
 
+    KhachHangDAO kdao = new KhachHangDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,35 +39,84 @@ public class DangKy extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
         String txtmakh = request.getParameter("txtmakh");
         String tenkh = request.getParameter("tenkh");
         String dienthoai = request.getParameter("dienthoai");
         String diachi = request.getParameter("diachi");
         String email = request.getParameter("email");
         String pass = request.getParameter("matkhau");
+        String error_kh = "";
+        String error_pass = "";
+        String error_sdt = "";
+        String error_email = "";
+        if (tenkh.trim().equals("")) {
+            error_kh = "Vui Lòng Nhập Tên";
+        }
+        if (error_kh.length() > 0) {
+            request.setAttribute("error_kh", error_kh);
+        }
+        if (dienthoai.trim().equals("")) {
+            error_sdt = "Vui lòng nhập số điện thoại";
+        } else {
+            if (kdao.checkSDT(dienthoai) == true) {
+                error_sdt = "Số điện thoại này đã được đăng ký";
+            }else{
+                 String so = "[0-9]+";
+                 if(!dienthoai.matches(so)){
+                    error_sdt = "Số điện thoại phải nhập bằng số"; 
+                 }
+            }
+        }
+        if (error_sdt.length() > 0) {
+            request.setAttribute("error_sdt", error_sdt);
+        }
+        if (email.trim().equals("")) {
+            error_email = " Vui lòng nhập email";
+        } else {
+            if (kdao.checkEmail(email) == true) {
+                error_email = "  Email này đã được đăng ký, vui lòng chọn tài khoản khác!";
+            }
+        }
+        if (error_email.length() > 0) {
+            request.setAttribute("error_email", error_email);
+        }
+        // Validate Mat Khau
+        if (pass.trim().equals("")) {
+            error_pass = "Vui lòng nhập Mật Khẩu của bạn !";
+        }
+        if (error_pass.length() > 0) {
+            request.setAttribute("error_pass", error_pass);
+        }
+        request.setAttribute("dienthoai", dienthoai);
+        request.setAttribute("tenkh", tenkh);
         String url = "/account.jsp";
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            KhachHang kh = new KhachHang();
-            KhachHangDAO kdao = new KhachHangDAO();
-            kh.setMakh(txtmakh);
-            kh.setDiaChi(diachi);
-            kh.setTenKh(tenkh);
-            kh.setDienThoai(dienthoai);
-            kh.setEmail(email);
-            kh.setMatKhau(pass);
-            kdao.insert(kh);//insert KH
+            if (error_pass.length() == 0 && error_email.length() == 0 && error_kh.length() == 0
+                    && error_sdt.length() == 0) {
+                KhachHang kh = new KhachHang();
 
-            if (kdao.checkLogin(email, pass) == true) {
-                url = "/index.jsp";
-                HttpSession session = request.getSession();
-                session.setAttribute("usernamex", email);
+                kh.setMakh(txtmakh);
+                kh.setDiaChi(diachi);
+                kh.setTenKh(tenkh);
+                kh.setDienThoai(dienthoai);
+                kh.setEmail(email);
+                kh.setMatKhau(pass);
+                kdao.insert(kh);//insert KH
+                if (kdao.checkLogin(email, pass) == true) {
+                    url = "/index.jsp";
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usernamex", email);
+                }
+
             } else {
                 url = "/account.jsp";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
             rd.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
