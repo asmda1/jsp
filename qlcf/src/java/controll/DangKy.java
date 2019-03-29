@@ -35,7 +35,8 @@ public class DangKy extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String txtmakh = request.getParameter("txtmakh");
         String tenkh = request.getParameter("tenkh");
         String dienthoai = request.getParameter("dienthoai");
@@ -55,7 +56,7 @@ public class DangKy extends HttpServlet {
             kh.setMatKhau(pass);
             kdao.insert(kh);//insert KH
 
-            if (kdao.checkLogin(tenkh, dienthoai) == true) {
+            if (kdao.checkLogin(email, pass) == true) {
                 url = "/index.jsp";
                 HttpSession session = request.getSession();
                 session.setAttribute("usernamex", email);
