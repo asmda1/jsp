@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author h.Phong
  */
-public class KhachHang {
+public class KhachHang implements Serializable{
   private  String makh,tenKh,email,dienThoai,diaChi, matKhau;
   private  boolean trangThai;
   private  int diemThuong;

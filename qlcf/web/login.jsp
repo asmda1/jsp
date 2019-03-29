@@ -53,7 +53,7 @@
                     <form align="center" action="LoginServlet" method="post">
                         <h4>Nhập Email</h4>
                         <p style="color: red"><%=error%>
-                    <div style="padding: 10px">  <input style="width: 50%;height:40px" type="text" placeholder="Tài Khoản" name="so_dien_thoai"
+                    <div style="padding: 10px">  <input style="width: 50%;height:40px" type="text" placeholder="Tài Khoản" name="email"
                                                         value="<%=email%>" /> </div>
                                                         
                             <h4>Nhập Mật Khẩu</h4>                            

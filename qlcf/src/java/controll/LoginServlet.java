@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("so_dien_thoai");
+        String email = request.getParameter("email");
         String pass = request.getParameter("mat_khau");
         String error = "";
 

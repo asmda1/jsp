@@ -127,19 +127,19 @@
                 <form align="center" action="DangKy" method="post">
                     <p>Họ Tên*</p>
                     <span style="color: red;"><%=error_kh%></span>  </br>
-                <input style="width: 50%;height:40px" name="tenkh" value="<%=tenkh%>"></input>
+                <input style="width: 50%;height:40px" placeholder="Họ Tên" name="tenkh" value="<%=tenkh%>"></input>
                 <p>Email Đăng Ký*</p>
                 <span style="color: red;"><%=error_email%></span>  </br>
-                <input style="width: 50%;height:40px" name="emial" value="<%=email%>"></input>
+                <input style="width: 50%;height:40px" placeholder="Email" name="email" value="<%=email%>"></input>
                 <p>Mật Khậu Đăng Ký*</p>
                 <span style="color: red;"><%=error_pass%></span>  </br>
-                <input style="width: 50%;height:40px" name="matkhau" value="<%=matkhau%>"></input>
+                <input style="width: 50%;height:40px" placeholder="Mật Khẩu" name="matkhau" value="<%=matkhau%>"></input>
                 <p>Địa Chỉ</p>
                 <span style="color: red;"><%=error_address%></span>  </br>
-                <input style="width: 50%;height:40px" name="diachi" value="<%=diachi%>"></input>
+                <input style="width: 50%;height:40px" placeholder="Địa Chỉ"  name="diachi" value="<%=diachi%>"></input>
                 <p>Số Điện Thoại*</p>
                 <span style="color: red;"><%=error_sdt%></span>  </br>
-                <input style="width: 50%;height:40px" name="dienthoai" value="<%=dienthoai%>"></input>
+                <input style="width: 50%;height:40px" placeholder="Số Điện Thoai"  name="dienthoai" value="<%=dienthoai%>"></input>
 
                 </br>
                 <input type="hidden" value="<%=session.getAttribute("usernamex")%>" name="Account" />

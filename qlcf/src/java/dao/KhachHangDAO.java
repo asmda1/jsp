@@ -67,7 +67,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         KhachHang model = new KhachHang();
         try {
             model.setMakh(rs.getString(1));
-            model.setTenKh(rs.getString(2));
+            model.setTenKh(rs.getNString(2));
               model.setMatKhau(rs.getString(3));
             model.setEmail(rs.getString(4));
             model.setDienThoai(rs.getString(5));
@@ -89,8 +89,8 @@ public class KhachHangDAO implements DAO<KhachHang> {
     }
 
 
-    public static boolean checkLogin(String sdt, String pass) {
-        String sql = "Select * from dbo.KhachHang WHERE email ='" + sdt + "' and matKhau='" + pass
+    public static boolean checkLogin(String email, String pass) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass
                 + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
