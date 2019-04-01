@@ -28,8 +28,8 @@
                         <nav id="khoamenu">                  
                             <ul class="">
                                 <li><a href="index.jsp" class="active">Trang Chủ</a></li>
-                                <li><a style="" href="contact.jsp">Liên Hệ</a></li>
-                                <li><a href="contact.jsp">Góp ý</a></li>
+                                <li><a style="" href="#">Liên Hệ</a></li>
+                                <li><a href="#">Góp ý</a></li>
                             </ul>
                         </nav>  
                     </div> </div> </div>  </div>

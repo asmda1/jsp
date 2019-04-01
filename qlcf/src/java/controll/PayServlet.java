@@ -132,7 +132,7 @@ public class PayServlet extends HttpServlet {
                     hd.setMaNguoiDung(nd);
                     hd.setTrangThai(false);
                     hd.setMaKhachHang(kh);
-                    hd.setTongTien(ds.getKey().getGiaBan() * ds.getValue());
+                    hd.setTongTien(ds.getValue() * ds.getKey().getGiaBan());
                     hd.setNgayHD(date);
                     hd.setChietKhau(0);
                     hdDAO.insert(hd);//insert HD chưa thanh toán 
@@ -148,7 +148,7 @@ public class PayServlet extends HttpServlet {
 
                 }
 
-                request.setAttribute("message", "Thanh toán thành công !"); 
+                request.setAttribute("message", "Thanh toán thành công !");
                 request.getRequestDispatcher("/checkout.jsp").forward(request, response);
                 // response.sendRedirect("/SOF301_Assignment/checkout.jsp");
             } else {
