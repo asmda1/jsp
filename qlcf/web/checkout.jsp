@@ -152,7 +152,7 @@
                     <input type="hidden" value="<%=session.getAttribute("usernamex")%>" name="txtemail" />
                     <input type="hidden" value="<%=kh.getMakh()%>" name="txmaKH" />
                     <input type="hidden" value="<%=AutogetMaHD()%>" name="txthd" />
-                    <input type="hidden" value="EX001" name="txtextra" />
+                    <input type="hidden" value="EX000" name="txtextra" />
                     <input type="hidden" value="M" name="txtSize" />
                     <input type="submit" value="Xác Nhận Mua Hàng" class="btn btn-primary" name="action" />
                 </form>

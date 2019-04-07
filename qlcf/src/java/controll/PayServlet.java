@@ -5,6 +5,7 @@
  */
 package controll;
 
+import com.nhom3.qlcf.helper.SendMail;
 import dao.CTHoaDonDAO;
 import dao.HoaDonDAO;
 import dao.KhachHangDAO;
@@ -145,7 +146,9 @@ public class PayServlet extends HttpServlet {
                     cthd.setSizeSP(size);
                     cthd.setSoLuong(ds.getValue());
                     hdct.insert(cthd);
-
+                    SendMail.sendMail(txtemail, "Mua Hàng Online [Anh/chi] " + tenkh, "Cam on anh/chi da dat mua hang cua chung toi, nhan vien se cap nhat don hang cho anh/chi so nhat!\n"
+                            + "\n Thong tin don hang: " + hd.getMaHoaDon()+ " \n Tong Tien: " + hd.getTongTien() + "\n Ngay Mua: " + hd.getNgayHD() + "\n Thong tin san pham se duoc nhan vien thong bao sau khi thanh toan, cam on"
+                                    + "!");
                 }
 
                 request.setAttribute("message", "Thanh toán thành công !");

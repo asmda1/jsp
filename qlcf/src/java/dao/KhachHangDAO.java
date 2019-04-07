@@ -68,7 +68,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         try {
             model.setMakh(rs.getString(1));
             model.setTenKh(rs.getNString(2));
-              model.setMatKhau(rs.getString(3));
+            model.setMatKhau(rs.getString(3));
             model.setEmail(rs.getString(4));
             model.setDienThoai(rs.getString(5));
             model.setDiaChi(rs.getString(6));
@@ -88,10 +88,9 @@ public class KhachHangDAO implements DAO<KhachHang> {
         return list.size() > 0 ? list.get(0) : null;
     }
 
-
     public static boolean checkLogin(String email, String pass) {
-        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass
-                + "'";
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass 
+                + "' and makh!='KH000'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -102,8 +101,9 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
-        public static boolean checkSDT(String sdt) {
-        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='"+ sdt+ "'";
+
+    public static boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='" + sdt + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -114,8 +114,9 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
-              public static boolean checkEmail(String email) {
-        String sql = "Select * from dbo.KhachHang WHERE email ='"+ email+ "'";
+
+    public static boolean checkEmail(String email) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -133,6 +134,6 @@ public class KhachHangDAO implements DAO<KhachHang> {
     }
 
     public static void main(String[] args) {
-      
+
     }
 }
