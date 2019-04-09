@@ -6,11 +6,12 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import model.KhachHang;
+import model.NguoiDung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.KhachHang;
 
 /**
  *
@@ -21,7 +22,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
     @Override
     public boolean insert(KhachHang t) {
         String sql = "Insert dbo.KhachHang values (?,?,?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMakh(), t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.isTrangThai(), t.getDiemThuong());
+        return JDBCHelper.executeUpdate(sql, t.getMakh(), t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(),t.isTrangThai(), t.getDiemThuong());
     }
 
     @Override
@@ -38,7 +39,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
 
     @Override
     public List<KhachHang> selectAll() {
-        String sql = "Select * from dbo.KhachHang";
+        String sql = "SELECT * FROM dbo.KhachHang where maKh != 'KH000' ";
         return select(sql);
     }
 
@@ -67,7 +68,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         KhachHang model = new KhachHang();
         try {
             model.setMakh(rs.getString(1));
-            model.setTenKh(rs.getNString(2));
+            model.setTenKh(rs.getString(2));
             model.setMatKhau(rs.getString(3));
             model.setEmail(rs.getString(4));
             model.setDienThoai(rs.getString(5));
@@ -81,28 +82,15 @@ public class KhachHangDAO implements DAO<KhachHang> {
         return model;
     }
 
-    @Override
+      @Override
     public KhachHang selectID(String ID) {
         String sql = "Select * from dbo.KhachHang where email = ?";
         List<KhachHang> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    public static boolean checkLogin(String email, String pass) {
-        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass 
-                + "' and makh!='KH000'";
-        try {
-            ResultSet rs = JDBCHelper.executeQuery(sql);
-            while (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static boolean checkSDT(String sdt) {
+    //bổ sung
+    public boolean checkSDT(String sdt) {
         String sql = "Select * from dbo.KhachHang WHERE dienThoai ='" + sdt + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
@@ -114,8 +102,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
-
-    public static boolean checkEmail(String email) {
+  public static boolean checkEmail(String email) {
         String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
@@ -127,13 +114,21 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
-
-    public boolean updateKHonl(KhachHang t, String makh) {
+   public boolean updateKHonl(KhachHang t, String makh) {
         String sql = "Update dbo.KhachHang set tenKh=?, dienThoai=?, diaChi=? where maKh=?";
         return JDBCHelper.executeUpdate(sql, t.getTenKh(), t.getDienThoai(), t.getDiaChi(), makh);
     }
-
-    public static void main(String[] args) {
-
+     public static boolean checkLogin(String email, String pass) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass 
+                + "' and makh!='KH000'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

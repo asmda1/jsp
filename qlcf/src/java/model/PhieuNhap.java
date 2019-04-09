@@ -14,23 +14,19 @@ import java.util.Date;
 public class PhieuNhap {
 
     private String maPhieu;
-    private HangHoa maHangHoa;
     private NhaCungCap maNhaCungCap;
     private NguoiDung maNguoiDung;
     private Date ngayNhap;
-    private int SoLuong;
     private double tongTien;
 
     public PhieuNhap() {
     }
 
-    public PhieuNhap(String maPhieu, HangHoa maHangHoa, NhaCungCap maNhaCungCap, NguoiDung maNguoiDung, Date ngayNhap, int SoLuong, double tongTien) {
+    public PhieuNhap(String maPhieu, NhaCungCap maNhaCungCap, NguoiDung maNguoiDung, Date ngayNhap, double tongTien) {
         this.maPhieu = maPhieu;
-        this.maHangHoa = maHangHoa;
         this.maNhaCungCap = maNhaCungCap;
         this.maNguoiDung = maNguoiDung;
         this.ngayNhap = ngayNhap;
-        this.SoLuong = SoLuong;
         this.tongTien = tongTien;
     }
 
@@ -40,14 +36,6 @@ public class PhieuNhap {
 
     public void setMaPhieu(String maPhieu) {
         this.maPhieu = maPhieu;
-    }
-
-    public HangHoa getMaHangHoa() {
-        return maHangHoa;
-    }
-
-    public void setMaHangHoa(HangHoa maHangHoa) {
-        this.maHangHoa = maHangHoa;
     }
 
     public NhaCungCap getMaNhaCungCap() {
@@ -74,24 +62,13 @@ public class PhieuNhap {
         this.ngayNhap = ngayNhap;
     }
 
-    public int getSoLuong() {
-        return SoLuong;
-    }
-
-    public void setSoLuong(int SoLuong) {
-        this.SoLuong = SoLuong;
-    }
-
     public double getTongTien() {
         return tongTien;
     }
 
     public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
+
     }
 
- 
-
-    
-    
 }

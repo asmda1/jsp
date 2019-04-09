@@ -5,15 +5,13 @@
  */
 package model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author h.Phong
  */
-public class KhachHang implements Serializable{
+public class KhachHang {
   private  String makh,tenKh,email,dienThoai,diaChi, matKhau;
-  private  boolean trangThai;
+  private boolean trangThai;
   private  int diemThuong;
 
     public KhachHang(String makh, String tenKh, String email, String dienThoai, String diaChi, String matKhau, boolean trangThai, int diemThuong) {
@@ -26,7 +24,6 @@ public class KhachHang implements Serializable{
         this.trangThai = trangThai;
         this.diemThuong = diemThuong;
     }
-
 
     public KhachHang() {
     }
@@ -71,14 +68,6 @@ public class KhachHang implements Serializable{
         this.diaChi = diaChi;
     }
 
-    public boolean isTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
     public int getDiemThuong() {
         return diemThuong;
     }
@@ -93,6 +82,14 @@ public class KhachHang implements Serializable{
 
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

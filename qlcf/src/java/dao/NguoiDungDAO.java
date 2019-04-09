@@ -6,14 +6,11 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
+import model.NguoiDung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.NguoiDung;
 
 /**
  *
@@ -23,8 +20,8 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public boolean insert(NguoiDung t) {
-        String sql = "Insert dbo.NguoiDung values (?,?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaNguoidung(), t.getTaiKhoan(), t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai());
+        String sql = "Insert dbo.NguoiDung values (?,?,?,?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaNguoidung(), t.getTaiKhoan(), t.getMatKhau(), t.getEmail(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai());
     }
 
     @Override
@@ -35,8 +32,8 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public boolean update(NguoiDung t) {
-        String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
-        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(), t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
+        String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, email=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
+        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(), t.getMatKhau(), t.getEmail(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
     }
 
     @Override
@@ -65,6 +62,7 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         return list;
     }
 
+    // 
     @Override
     public NguoiDung readFromResultSet(ResultSet rs) {
         NguoiDung model = new NguoiDung();
@@ -72,10 +70,11 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
             model.setMaNguoidung(rs.getString(1));
             model.setTaiKhoan(rs.getString(2));
             model.setMatKhau(rs.getString(3));
-            model.setHoTen(rs.getString(4));
-            model.setDienThoai(rs.getString(5));
-            model.setVaiTro(rs.getString(6));
-            model.setTrangThai(rs.getBoolean(7));
+            model.setEmail(rs.getString(4));
+            model.setHoTen(rs.getString(5));
+            model.setDienThoai(rs.getString(6));
+            model.setVaiTro(rs.getString(7));
+            model.setTrangThai(rs.getBoolean(8));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -84,10 +83,62 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public NguoiDung selectID(String ID) {
-
         String sql = "Select * from dbo.NguoiDung where maNguoiDung=?";
         List<NguoiDung> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    //bổ sung
+    public boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.NguoiDung WHERE dienThoai ='" + sdt + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean checkEmail(String email) {
+        String sql = "Select * from dbo.NguoiDung WHERE email ='" + email + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean checkMK(String mk) {
+        String sql = "Select * from dbo.NguoiDung WHERE matkhau ='" + mk + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean checkMa(String ma) {
+        String sql = "Select * from dbo.NguoiDung WHERE maNguoiDung ='" + ma + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static boolean checkLogin(String username, String pass) {
@@ -103,10 +154,4 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         }
         return false;
     }
-
-    public static void main(String[] args) {
-      
-        System.out.println(checkLogin("admin","123"));
-    }
-
 }

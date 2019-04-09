@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author baotri1998
+ * @author h.P
  */
 public class HoaDon {
     private String maHoaDon;

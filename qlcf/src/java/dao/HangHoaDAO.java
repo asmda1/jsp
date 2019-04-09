@@ -6,12 +6,11 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-
+import model.HangHoa;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.HangHoa;
 
 /**
  *
@@ -35,7 +34,7 @@ public class HangHoaDAO implements DAO<HangHoa> {
     @Override
     public boolean update(HangHoa t) {
         String sql = "UPDATE dbo.HangHoa SET tenHangHoa=?,donViTinh=?,soLuong=?, donGia=?,moTa=? where maHangHoa=?";
-        return JDBCHelper.executeUpdate(sql, t.getTenHangHoa(), t.getDonViTinh(), t.getGiaVon(), t.getMoTa(), t.getMaHangHoa());
+        return JDBCHelper.executeUpdate(sql, t.getTenHangHoa(), t.getDonViTinh(),t.getSoLuong(), t.getGiaVon(), t.getMoTa(), t.getMaHangHoa());
 
     }
 
@@ -82,7 +81,19 @@ public class HangHoaDAO implements DAO<HangHoa> {
         return model;
     }
 
-   
+       public static boolean checkLogin(String email, String pass) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "' and matKhau='" + pass 
+                + "' and makh!='KH000'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public HangHoa selectID(String ID) {

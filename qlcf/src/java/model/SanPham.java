@@ -6,25 +6,26 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  *
  * @author baotri1998
  */
-public class SanPham implements Comparable<SanPham>{
+public class SanPham implements Comparable<SanPham> {
 
     private String maSanPham;
     private LoaiSanPham maLoaiSanPham;
-    private HangHoa maHangHoa;
     private String tenSp;
     private double giaBan;
     private boolean trangThai;
     private String hinhAnh;
     private SizeSP sizeSP;
-    public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, HangHoa maHangHoa, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
+
+    public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
         this.maSanPham = maSanPham;
         this.maLoaiSanPham = maLoaiSanPham;
-        this.maHangHoa = maHangHoa;
+
         this.tenSp = tenSp;
         this.giaBan = giaBan;
         this.trangThai = trangThai;
@@ -38,8 +39,6 @@ public class SanPham implements Comparable<SanPham>{
     public void setSizeSP(SizeSP sizeSP) {
         this.sizeSP = sizeSP;
     }
-
-    
 
     public SanPham() {
     }
@@ -60,14 +59,6 @@ public class SanPham implements Comparable<SanPham>{
         this.maLoaiSanPham = maLoaiSanPham;
     }
 
-    public HangHoa getMaHangHoa() {
-        return maHangHoa;
-    }
-
-    public void setMaHangHoa(HangHoa maHangHoa) {
-        this.maHangHoa = maHangHoa;
-    }
-
     public String getTenSp() {
         return tenSp;
     }
@@ -84,7 +75,6 @@ public class SanPham implements Comparable<SanPham>{
         this.giaBan = giaBan;
     }
 
-    
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -103,9 +93,7 @@ public class SanPham implements Comparable<SanPham>{
 
     @Override
     public int compareTo(SanPham t) {
-        return  this.getMaSanPham().compareTo(t.getMaSanPham());
+        return this.getMaSanPham().compareTo(t.getMaSanPham());
     }
-    
-    
 
 }

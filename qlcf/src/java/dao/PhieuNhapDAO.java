@@ -6,16 +6,16 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import model.HangHoa;
+import model.NguoiDung;
+import model.NhaCungCap;
+import model.PhieuNhap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.HangHoa;
-import model.NguoiDung;
-import model.NhaCungCap;
-import model.PhieuNhap;
 
 /**
  *
@@ -25,8 +25,8 @@ public class PhieuNhapDAO implements DAO<PhieuNhap> {
 
     @Override
     public boolean insert(PhieuNhap t) {
-        String sql = "Insert dbo.PhieuNhap values (?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaPhieu(), t.getMaHangHoa().getMaHangHoa(), t.getMaNhaCungCap().getMaNhaCungCap(), t.getMaNguoiDung().getMaNguoidung(), t.getNgayNhap(), t.getSoLuong(), t.getTongTien());
+        String sql = "Insert dbo.PhieuNhap values (?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaPhieu(), t.getMaNhaCungCap().getMaNhaCungCap(), t.getMaNguoiDung().getMaNguoidung(), t.getNgayNhap(), t.getTongTien());
 
     }
 
@@ -38,8 +38,8 @@ public class PhieuNhapDAO implements DAO<PhieuNhap> {
 
     @Override
     public boolean update(PhieuNhap t) {
-        String sql = "Update dbo.PhieuNhap set maHangHoa=?, maNhacungCap=?, nguoiNhap=?, ngayNhap=?, soLuong=?, tongTien=? where maPhieu=?";
-        return JDBCHelper.executeUpdate(sql, t.getMaHangHoa().getMaHangHoa(), t.getMaNhaCungCap().getMaNhaCungCap(), t.getMaNguoiDung().getMaNguoidung(), t.getNgayNhap(), t.getSoLuong(), t.getTongTien(), t.getMaPhieu());
+        String sql = "Update dbo.PhieuNhap set  maNhacungCap=?, nguoiNhap=?, ngayNhap=?, tongTien=? where maPhieu=?";
+        return JDBCHelper.executeUpdate(sql, t.getMaNhaCungCap().getMaNhaCungCap(), t.getMaNguoiDung().getMaNguoidung(), t.getNgayNhap(), t.getTongTien(), t.getMaPhieu());
     }
 
     @Override
@@ -74,21 +74,16 @@ public class PhieuNhapDAO implements DAO<PhieuNhap> {
         try {
             model.setMaPhieu(rs.getString(1));
 
-            HangHoa hh = new HangHoa();
-            hh.setMaHangHoa(rs.getString(2));
-            model.setMaHangHoa(hh);
-
             NhaCungCap ncc = new NhaCungCap();
-            ncc.setMaNhaCungCap(rs.getString(3));
+            ncc.setMaNhaCungCap(rs.getString(2));
             model.setMaNhaCungCap(ncc);
 
-       NguoiDung nd = new NguoiDung();
-            nd.setMaNguoidung(rs.getString(4));
+            NguoiDung nd = new NguoiDung();
+            nd.setMaNguoidung(rs.getString(3));
             model.setMaNguoiDung(nd);
 
-            model.setNgayNhap(rs.getDate(5));
-            model.setSoLuong(rs.getInt(6));
-            model.setTongTien(rs.getDouble(7));
+            model.setNgayNhap(rs.getDate(4));
+            model.setTongTien(rs.getDouble(5));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

@@ -6,14 +6,14 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-
+import model.NguoiDung;
+import model.NhaCungCap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.NhaCungCap;
 
 /**
  *
@@ -80,13 +80,23 @@ public class NhaCungCapDAO implements DAO<NhaCungCap> {
         return model;
     }
 
- 
-
     @Override
     public NhaCungCap selectID(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from dbo.NhaCungCap where dienThoai=?";
+        List<NhaCungCap> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
-    
-    
+     public boolean checkMa(String ma) {
+        String sql = "Select * from dbo.NhaCungCap WHERE maNhaCungCap ='" + ma + "' or dienThoai='" + ma + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

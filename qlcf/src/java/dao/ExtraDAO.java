@@ -6,14 +6,13 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-
+import model.Extra;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Extra;
 
 /**
  *
@@ -41,7 +40,7 @@ public class ExtraDAO implements DAO<Extra> {
 
     @Override
     public List<Extra> selectAll() {
-        String sql = "Select * from dbo.Extra";
+        String sql = "Select * from dbo.Extra where id != 'EX000' ";
         return select(sql);
     }
 

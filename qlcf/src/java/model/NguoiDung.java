@@ -10,13 +10,14 @@ package model;
  * @author baotri1998
  */
 public class NguoiDung {
-  private  String maNguoidung, taiKhoan,matKhau,hoTen,dienThoai,vaiTro;
+  private  String maNguoidung, taiKhoan,matKhau,email,hoTen,dienThoai,vaiTro;
  private   boolean trangThai;
 
-    public NguoiDung(String maNguoidung, String taiKhoan, String matKhau, String hoTen, String dienThoai, String vaiTro, boolean trangThai) {
+    public NguoiDung(String maNguoidung, String taiKhoan, String matKhau, String email, String hoTen, String dienThoai, String vaiTro, boolean trangThai) {
         this.maNguoidung = maNguoidung;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
+        this.email = email;
         this.hoTen = hoTen;
         this.dienThoai = dienThoai;
         this.vaiTro = vaiTro;
@@ -24,6 +25,14 @@ public class NguoiDung {
     }
 
     public NguoiDung() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMaNguoidung() {

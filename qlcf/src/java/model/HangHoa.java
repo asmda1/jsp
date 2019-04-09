@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author baotri1998
+ * @author h.P
  */
 public class HangHoa implements Serializable {
     private String maHangHoa,tenHangHoa,donViTinh,moTa;

@@ -9,6 +9,7 @@ package model;
  *
  * @author baotri1998
  */
+/*Ham tao Class CTHoaDon*/
 public class CTHoaDon {
 
     private int id;
@@ -29,51 +30,51 @@ public class CTHoaDon {
         this.soLuong = soLuong;
         this.sizeSP = sizeSP;
     }
-
+/*Phuong thuc getId*/
     public int getId() {
         return id;
     }
-
+/*Phuong thuc setId*/
     public void setId(int id) {
         this.id = id;
     }
-
+/*Phuong thuc getMaHoaDon*/
     public HoaDon getMaHoaDon() {
         return maHoaDon;
     }
-
+/*Phuong thuc setMaHoaDon*/
     public void setMaHoaDon(HoaDon maHoaDon) {
         this.maHoaDon = maHoaDon;
     }
-
+/*Phuong thuc getMaSanPham*/
     public SanPham getMaSanPham() {
         return maSanPham;
     }
-
+/*Phuong thuc setMaSanPham*/
     public void setMaSanPham(SanPham maSanPham) {
         this.maSanPham = maSanPham;
     }
-
+/*Phuong thuc getExtra*/
     public Extra getExtra() {
         return extra;
     }
-
+/*Phuong thuc setExtra*/
     public void setExtra(Extra extra) {
         this.extra = extra;
     }
-
+/*Phuong thuc getSoLong*/
     public int getSoLuong() {
         return soLuong;
     }
-
+/*Phuong thuc setSoLuong*/
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
-
+/*Phuong thuc getSizeSP*/
     public SizeSP getSizeSP() {
         return sizeSP;
     }
-
+/*Phuong thuc setSizeSP*/
     public void setSizeSP(SizeSP sizeSP) {
         this.sizeSP = sizeSP;
     }

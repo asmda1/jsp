@@ -6,12 +6,11 @@
 package dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-
+import model.LoaiSanPham;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.LoaiSanPham;
 
 /**
  *
